@@ -1,0 +1,64 @@
+<!--Image Gallery for Community Events
+Scenario: Show images from past events in a table layout.
+Objective: Work with <img>, tables, and formatting tags.
+Task:
+• Use a <table> with 2 rows and 3 columns of <img> tags
+• Include alt, title, and style each image with borders using a class
+• Add a caption to describe each event-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img{
+            width: 100%;
+            height: 300px;
+            border: 2px solid black;
+        }
+        table{
+            width: 100%;
+            table-layout: fixed;
+        }
+        td{
+            width: 33.33%;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+    <h2 style="text-align: center;">Events Gallery</h2>
+    <table>
+        <tr>
+            <td>
+                <img src="ev1.jpeg" alt="tree plantation" title="tree plantation" class="img"><br>
+                Tree Plantation
+            </td>
+            <td>
+                <img src="ev2.jpg" alt="sports day" title="sports day" class="img"><br>
+                sports
+            </td>
+            <td>
+                <img src="ev3.jpg" alt="health camp" title="sports camp" class="img"><br>
+                health camp
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="ev4.jpg" alt="blood donation" title="blood donation" class="img"><br>
+                blood donation
+            </td>
+            <td>
+                <img src="ev5.webp" alt="clean drive " title="clean drive" class="img"><br>
+                clean drive
+            </td>
+            <td>
+                <img src="ev6.jpg" alt="food distribution" title="food distribution" class="img"><br>
+                food distribution
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
