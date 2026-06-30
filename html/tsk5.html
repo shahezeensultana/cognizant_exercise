@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+     <style>
+        body{
+            font-family: Arial;
+            background-color: lightblue;
+        }
+
+        form{
+            width:300px;
+            margin:auto;
+            background:white;
+            padding:20px;
+            border:1px solid black;
+        }
+
+        input, select, textarea{
+            width:100%;
+            margin-bottom:10px;
+        }
+
+        output{
+            color:green;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Event Registration Form</h2>
+    <form onsubmit="mesg(event)">
+        Name:<br>
+        <input type="text" placeholder="Enter Name"><br>
+        Email:<br>
+        <input type="email" placeholder="Enter mail"><br>
+        Date:<br>
+        <input type="date"><br>
+        Event Type:<br>
+        <select required>
+            <option value="">Select Event </option>
+            <option >Seminar</option>
+            <option >Sports</option>
+            <option >Workshop</option>
+        </select><br>
+        Message:<br>
+        <textarea placeholder="Enter message"></textarea><br>
+        <input type="submit" value="register">
+        <output id="out"></output>
+    </form>
+    <script>
+        function mesg(event){
+            event.preventDefault();
+            document.getElementById("out").innerHTML =
+            "Registration Successful!";
+        }
+    </script>
+
+</body>
+</html>
