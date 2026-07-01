@@ -1,0 +1,108 @@
+<!--Event Feedback with Events Handling
+Scenario: Collect real-time feedback and interactions from the user.
+Objective: Handle blur, change, click, double-click, and keyboard events.
+Task:
+• Use onblur to validate a phone number field
+• Use onchange on a dropdown to display the selected event fee
+• onclick on a submit button to show a confirmation
+• ondblclick on an image to enlarge it
+• Capture key events in the feedback textarea and count characters-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event FeedBack Form</title>
+    <style>
+        body{
+            font-family: Arial;
+            background-color: aqua;
+        }
+        h2{
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            color: blue;
+        }
+        input,select,textarea{
+            width: 250px;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        img{
+            border: 2px solid black;
+        }
+        button{
+            padding: 8px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: darkblue;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h2>Event FeedBack Form</h2>
+    phone Number: <br>
+    <input type="text" id="phno" onblur="checknum()">
+    <br><br>
+    select Event: <br>
+    <select id="event" onchange="showeve()">
+        <option>Choose</option>
+        <option>Sports</option>
+        <option>Music</option>
+        <option>Workshop</option>
+    </select>
+    <p id="fee"></p>
+    <input type="file" onchange="loadImage(this)">
+    <br><br>
+    <img id="img" width="150" ondblclick="bigimage(id)">
+    <br><br>
+    FeedBack:
+    <textarea id="text" onkeyup="count()"></textarea>
+    <p id="cnt">Characters:0</p>
+    <button onclick="submit()">Submit</button>
+
+    <script>
+        function checknum(){
+            d=document.getElementById("phno").value;
+            if(d.length!=10){
+                alert("phno must be 10digits")
+            }
+        }
+        function showeve(){
+            d=document.getElementById("event").value;
+            if(d=="Sports"){
+                document.getElementById("fee").innerHTML="Fee: 500/-"
+            }
+            else if(d=="Music"){
+                document.getElementById("fee").innerHTML="Fee: 700/-"
+            }
+            else if(d=="Workshop"){
+                document.getElementById("fee").innerHTML="Fee: 300/-"
+            }
+        }
+        function submit(){
+            alert("FeedBack Submitted")
+        }
+        function loadImage(input){
+    document.getElementById("img").src =
+        URL.createObjectURL(input.files[0]);
+}
+        function bigimage() {
+            document.getElementById("img").width = 300;
+        }
+        function count(){
+            d=document.getElementById("text").value.length;
+            document.getElementById("cnt").innerHTML="Characters:"+d;
+        }
+
+    </script>
+</body>
+</html>
