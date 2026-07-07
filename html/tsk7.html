@@ -1,0 +1,66 @@
+<!--Video Invite with Media Events
+Scenario: Show a short event promo video.
+Objective: Work with <video> and oncanplay event
+Task:
+• Insert a <video> element with source and controls
+• Use oncanplay to display a message like "Video ready to play"
+• Use onbeforeunload to warn users if they try to leave the form page unfinished-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            margin: 30px;
+        }
+        h2,h3{
+            text-align: center;
+        }
+        video{
+            display: block;
+            margin: 20px auto;
+        }
+        form{
+            width: 300px;
+            margin: auto;
+        }
+        input{
+        width: 100%;
+        padding: 5px;
+        margin: 5px 0 10px;
+    }
+    #vdo{
+        text-align: center;
+        color: green;
+        font-weight: bold;
+    }
+    </style>
+</head>
+<body>
+    <h2>Promotional video</h2>
+    <video width="500" controls oncanplay="display()">
+        <source src="promo.mp4" type="video/mp4">
+        Browser doesn't support this video
+    </video>
+    <p id="vdo"></p>
+    <h3>Registration form</h3>
+    <form action="">
+        Name: 
+        <input type="text"><br><br>
+        Email:
+        <input type="email"><br><br>
+        <input type="submit" value="register" onclick="window.onbeforeunload=null;alert('Registration Successful');">
+    </form>
+    <script>
+        function display(){
+            document.getElementById("vdo").innerHTML="video ready to play"
+        }
+        window.onbeforeunload=function (){
+            return "Are you sure you want to leave? Your form may be unfinished.";
+        };
+    </script>
+</body>
+</html>
