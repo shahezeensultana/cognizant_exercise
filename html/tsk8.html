@@ -1,0 +1,82 @@
+<!--Saving User Preferences
+Scenario: Store preferred event type for returning users.
+Objective: Work with localStorage, sessionStorage, and deletion
+Task:
+• Save selected event type in localStorage
+• On reload, retrieve and pre-select it
+• Add a "Clear Preferences" button that clears both localStorage and sessionStorage-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+    
+        h2{
+            color: navy;
+        }
+    
+        select{
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    
+        button{
+            padding: 6px 12px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>select preferred Event Type</h2>
+    <select id="eventid">
+        <option value="">select event</option>
+        <option value="seminar">seminar</option>
+        <option value="workshop">workshop</option>
+        <option value="Webinar">Webinar</option>
+        <option value="Hackathon">Hackathon</option>
+    </select>    
+    <br><br>
+    <button id="savebtn">Save</button>
+    <button id="clrbtn">Clear</button>
+    <script>
+        const evntype=document.getElementById("eventid");
+        const savebtn=document.getElementById("savebtn");
+        const clrbtn=document.getElementById("clrbtn");
+        //displaying preferred eventtype when page loads
+        window.onload=function(){
+            const svd1=localStorage.getItem("preferredItem");
+            if (svd1){
+                evntype.value=svd1;
+            }
+        }
+
+        //saving preference in localstorage
+        savebtn.addEventListener("click",function(){
+            const svd=evntype.value;
+            if (svd!==""){
+                localStorage.setItem("preferredItem",svd);
+                alert("preference saved")
+            }
+            else{
+                alert("select any event type");
+            }
+        })
+
+        //clearing local and session storage
+        clrbtn.addEventListener("click",function(){
+            localStorage.clear();
+            sessionStorage.clear();
+            evntype.value="";
+            alert("preference cleared");
+        })
+    </script>
+</body>
+</html>
