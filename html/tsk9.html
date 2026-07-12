@@ -1,0 +1,108 @@
+<!--
+    Geolocation for Event Mapping
+Scenario: Locate the nearest event to the user.
+Objective: Practice geolocation.getCurrentPosition, error handling, and options
+Task:
+• Create a button “Find Nearby Events”
+• On click, use getCurrentPosition to get and display coordinates
+• Handle permission denial and timeouts
+• Use high accuracy options
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 9</title>
+    <style>
+        body{
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+    
+        button{
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    
+        #dsply{
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid black;
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>Finding nearest Events to user</h2>
+    <button onclick="FindEvents()">Find Nearby Events</button>
+    <p id="dsply"></p>
+    <script>
+        const events=[
+            {name:"Music Fest",lat: 17.3850, lon: 78.4867 },
+            { name: "Tech Expo", lat: 17.4000, lon: 78.5000 },
+            { name: "Food Carnival", lat: 17.3600, lon: 78.4700 },
+            { name: "Book Fair", lat: 17.4100, lon: 78.4800 }
+    ];
+    function FindEvents(){
+        const ev=document.getElementById("dsply");
+        if(!navigator.geolocation){
+            ev.innerHTML="Geolocation is not supported by Browser";
+            return;
+        }
+        const options={
+            enableHighAccuracy: true,
+            timeout:5000,
+            maximumAge:0
+        };
+        navigator.geolocation.getCurrentPosition(success,error,options);
+        function success(position){
+            const lat=position.coords.latitude;
+            const lng=position.coords.longitude;
+            let mn=Number.MAX_VALUE;
+            let mne=events[0];
+            for(let e of events){
+                let ds=Math.sqrt(
+                    (lat-e.lat)**2+
+                    (lng-e.lon)**2
+                );
+                if(ds<mn){
+                    mn=ds;
+                    mne=e;
+                }
+            }
+            ev.innerHTML="<h3>Your Location</h3>" +
+                    "Latitude: " + lat + "<br>" +
+                    "Longitude: " + lng + "<br><br>" +
+
+                    "<h3>Nearest Event</h3>" +
+                    "Event Name: " + mne.name;
+        }
+        function error(err){
+            switch(err.code){
+                case err.PERMISSION_DENIED:
+                        ev.innerHTML = "Permission denied by the user.";
+                        break;
+
+                    case err.POSITION_UNAVAILABLE:
+                        ev.innerHTML = "Location information is unavailable.";
+                        break;
+
+                    case err.TIMEOUT:
+                        ev.innerHTML = "Location request timed out.";
+                        break;
+
+                    default:
+                        ev.innerHTML = "An unknown error occurred.";
+            }
+        }
+    }
+    </script>
+</body>
+</html>
